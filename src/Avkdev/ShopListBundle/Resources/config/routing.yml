@@ -1,3 +1,13 @@
 avkdev_shop_list_homepage:
-    path:     /hello/{name}
+    path:     /
     defaults: { _controller: AvkdevShopListBundle:Default:index }
+
+avkdev_shop_list_ajax_saveitem:
+    path:     /ajax_saveitem
+    defaults: { _controller: AvkdevShopListBundle:Default:ajaxSaveItem }
+    requirements: { _method: post }
+
+avkdev_shop_list_ajax_refresh:
+    path:     /ajax_refresh
+    defaults: { _controller: AvkdevShopListBundle:Default:ajaxRefresh }
+

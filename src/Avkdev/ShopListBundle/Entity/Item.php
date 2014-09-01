@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Item
 {
+    const STATUS_NORMAL  = 0;
+    const STATUS_REMOVED = 1;
+
     /**
      * @var integer
      */
@@ -23,16 +26,29 @@ class Item
      * @var \DateTime
      */
     private $changedAt;
-
+    /**
+     * @var integer
+     */
+    private $status;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -49,13 +65,13 @@ class Item
     }
 
     /**
-     * Get title
+     * Get changedAt
      *
-     * @return string 
+     * @return \DateTime
      */
-    public function getTitle()
+    public function getChangedAt()
     {
-        return $this->title;
+        return $this->changedAt;
     }
 
     /**
@@ -72,12 +88,42 @@ class Item
     }
 
     /**
-     * Get changedAt
-     *
-     * @return \DateTime 
+     * @ORM\PrePersist
      */
-    public function getChangedAt()
+    public function setChangeAtValue()
     {
-        return $this->changedAt;
+        $this->setChangedAt(new \DateTime());
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setStatusValue()
+    {
+        $this->setStatus(self::STATUS_NORMAL);
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     * @return Item
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        return $this;
     }
 }

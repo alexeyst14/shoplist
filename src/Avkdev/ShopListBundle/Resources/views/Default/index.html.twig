@@ -1,1 +1,23 @@
-Hello {{ name }}!
+{% extends 'AvkdevShopListBundle::layout.html.twig' %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        const URL_AJAX_SAVE_ITEM = "{{ path('avkdev_shop_list_ajax_saveitem') }}";
+        const URL_AJAX_REFRESH = "{{ path('avkdev_shop_list_ajax_refresh') }}";
+    </script>
+    <script src="{{ asset('bundles/avkdevshoplist/js/jquery.jeditable.js') }}"></script>
+    <script src="{{ asset('bundles/avkdevshoplist/js/items.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <input type="hidden" id="last_refresh" value="{{ last_refresh }}" />
+    <form id="shop_list_form">
+        {% for item in items %}
+            <p class="item">
+                <span id="item_{{ item.id }}" class="editable">{{ item.title }}</span>
+                <a href="#" class="remove_item">[X]</a>
+            </p>
+        {% endfor %}
+    </form>
+    <button id="button_add">Добавить</button>
+{% endblock %}

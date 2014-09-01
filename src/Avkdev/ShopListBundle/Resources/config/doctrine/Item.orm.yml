@@ -15,7 +15,13 @@ Avkdev\ShopListBundle\Entity\Item:
         title:
             type: string
             length: 255
+        status:
+            type: smallint
+            options:
+                default: 0
         changedAt:
             type: datetimetz
             column: changed_at
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [ setChangeAtValue, setStatusValue ]
+        preUpdate: [ setChangeAtValue ]

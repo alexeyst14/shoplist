@@ -1,18 +1,28 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Shopping list for traveling</title>
-    <link rel="stylesheet" href="css/styles.css?v=1.0">
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {%  block javascript %}{% endblock %}
+    {% stylesheets 'bundles/avkdevshoplist/css/*' filter='cssrewrite' %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+    {% endstylesheets %}
 </head>
-
 <body>
-{% block body %}{% endblock %}
-
-<script src="js/scripts.js"></script>
+    <section id="wrapper">
+        <header>
+            <h1>Shopping list for travelling</h1>
+        </header>
+        <section id="content">
+            {% block body %}{% endblock %}
+        </section>
+        <footer>
+             Test task created by <a href="https://github.com/alexeyst14">Oleksii Kyselov</a> for Developex company
+        </footer>
+    </section>
 </body>
 </html>

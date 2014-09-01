@@ -2,6 +2,7 @@
 
 namespace Avkdev\ShopListBundle\Entity;
 
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,45 @@ use Doctrine\ORM\EntityRepository;
  */
 class ItemRepository extends EntityRepository
 {
+    /**
+     * Returns default items list
+     * @return array
+     */
+    public function getList()
+    {
+        return $this->findBy(array('status' => Item::STATUS_NORMAL));
+    }
+
+    /**
+     * @param $timestamp integer
+     * @return array
+     */
+    public function findChangedAfterLastRefresh($timestamp)
+    {
+        $datetime = new \DateTime();
+        $datetime->setTimestamp($timestamp);
+        $criteria = Criteria::create()->where(Criteria::expr()->gt('changedAt', $datetime));
+        $collection = $this->matching($criteria);
+        $ret = [];
+        foreach ($collection as $item) {
+            $ret[] = array(
+                'id' => $item->getId(),
+                'status' => $item->getStatus(),
+                'title'  => $item->getTitle(),
+            );
+        }
+        return $ret;
+    }
+
+    /**
+     * @return int
+     * @TODO This is must store into separate table for highload
+     */
+    public function getLastChangeTimestamp()
+    {
+        $datetime = $this->createQueryBuilder('i')
+            ->select('MAX(i.changedAt) AS last_change_time')
+            ->getQuery()->getSingleScalarResult();
+        return strtotime($datetime);
+    }
 }
