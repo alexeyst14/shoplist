@@ -1,0 +1,4 @@
+avkdev_shop_list:
+    resource: "@AvkdevShopListBundle/Resources/config/routing.yml"
+    prefix:   /
+

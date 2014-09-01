@@ -1,0 +1,7 @@
+parameters:
+#    avkdev_shop_list.example.class: Avkdev\ShopListBundle\Example
+
+services:
+#    avkdev_shop_list.example:
+#        class: %avkdev_shop_list.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

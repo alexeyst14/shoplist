@@ -1,0 +1,3 @@
+avkdev_shop_list_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AvkdevShopListBundle:Default:index }

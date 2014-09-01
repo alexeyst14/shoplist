@@ -1,0 +1,21 @@
+Avkdev\ShopListBundle\Entity\Item:
+    type: entity
+    table: item
+    repositoryClass: Avkdev\ShopListBundle\Entity\ItemRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    indexes:
+        changed_at_idx:
+            columns: [ changed_at ]
+    fields:
+        title:
+            type: string
+            length: 255
+        changedAt:
+            type: datetimetz
+            column: changed_at
+    lifecycleCallbacks: {  }
